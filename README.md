@@ -1,6 +1,77 @@
 # 202530128 정하형 java2 
 
-## 3/23
+## 3/25
+
+### scanner 예제
+```java
+import java.util.Scanner;
+
+public class Boo {
+    public static void main(String[] args) {
+        System.out.println("이름 , 도시 ,나이, 체중 ,독신 여부를 빈칸으로 분리해서 입력하세요");
+
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.next();
+        System.out.println("당신의 이름은 : " + name + " 입니다,"); 
+        String city = scanner.next();
+        System.out.println("당신이 사는 도시는 " + city + "입니다.");
+        int age = scanner.nextInt();
+        System.out.println("당신의 나이는 " + age + "입니다.");
+        double weight = scanner.nextDouble();
+        System.out.println("당신의 체중은 " + weight + "입니다.");
+        boolean single = scanner.nextBoolean();
+        System.out.println("당신의 독신 여부는 " + single + "입니다.");
+        scanner.close();
+    }
+}
+
+```
+
+### 자바의 키 입력 : Scannre
+- Scanner 클래스
+- 읽은 바이트를 문자 정수 실수 불린 문자열 등 다양한 타입으로 변환하여 리턴
+- 객체를 생성하서 사용
+- 키보드에 연결된 System.in에게 키를 읽게 하고, 원하는 타입으로 변환하여 리턴.
+- 입력되는 키 값을 공백으로 구분되는 토큰 단위로 읽음
+
+### 타입 변환 예제
+```java
+public class TypeConversion24 {
+    public static void main(String[] args) {
+        byte b = 127;
+        int i = 100;
+
+        System.out.println(b+ i); // b 가 int 타입으로 자동변환
+        System.out.println(10/4);
+        System.out.println(10.0/4); // 4 가 4.4으로 자동 변환
+        System.out.println((char)0x12345678);
+        System.out.println((byte) (b+i));
+        System.out.println((int) 2.9 + 1.8);
+        System.out.println((int)(2.9+1.8));
+        System.out.println((int)2.9 + (int) 1.3);
+    }
+}
+```
+
+### 타입 변환
+- 자동 타입 변환 : 컴파일러에 의해 원래의 타입보다 큰타입으로 자동변환
+- 강제 타입 변환 : 개발자의 의도적 타입 변환
+
+### 예제
+```java
+public class Bar {
+    public static void main(String[] args) {
+        final double PI = 3.14; // 원주율을 상수로 하면
+        double radius = 10.2; // 원의 반지름
+        double circleArea = radius * radius * PI; // 원의 면적 계산
+
+        // 원의 면적을 화면에 출력한다.
+        System.out.println("반지름 " + radius   + " , ");
+        System.out.println("원의 면적");
+        System.out.println("원의 면적 = " +  circleArea);
+    }   
+}
+```
 
 ### var 키워드
 - var 키워드는 타입을 생략하고 변수 선언을 할 수 있습니다.
