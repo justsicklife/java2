@@ -2,6 +2,84 @@
 
 ## 4/1
 
+### 예제 37
+```java
+import java.util.Scanner;
+
+public class Ex37ArrayAccess {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int intArray[];
+        intArray = new int[5];
+
+        int max = 0;
+        System.out.println("양수 5 개를 입력하세요");
+
+        for(int i = 0 ; i < 5 ; i++) {
+            intArray[i] =   scanner.nextInt();
+            if(intArray[i] > max){
+                max =intArray[i];
+            }
+        }
+
+        System.out.println("가장 큰 수는 " +max + " 입니다.");
+
+        scanner.close();
+    }
+}
+```
+
+### 레퍼런스 치환과 배열 공유
+- 레퍼런스 치환으로 두 레퍼런스가 하나의 배열 공유
+
+
+### 배열 인덱스와 배열 원소 접근
+- 배열의 인덱스는 0부터 크기는 1 부터
+- 인덱스를 잘못 사용한 경우
+- 반드시 배열 생성 후 접근
+
+### 배열 선언 및 생성 디테일
+- 배열은 선언과 생성의 두 단계 필요 : 선언과 동시에 생성할 수 있음
+- 배열 선언 : 배열 이름 선언
+- 배열 생성 : 배열 공간 할당 받는 과정
+- 배열 초기화 : 배열 생성과 값 초기화
+
+### 배열 
+- 인덱스와 인덱스에 대응하는 데이터들로 이루어진 자료 구조로 한 번에 많은 메모리 공간 선언
+- 같은 타입의 데이터들이 순차적으로 저장되는 공간으로 인덱스를 이용하여 원소 데이터접근.
+- 반복문을 이용하여 처리하기 에 적합한 자료구조
+- 배열 인덱스 : 0 부터 시작
+
+### break 예제
+```java
+import java.util.Scanner;
+
+public class Ex06 {
+    public static void main(String[] args) {    
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("exit 를 입력하면 종료됩니다.");
+        while(true) {
+            System.out.println(">>");
+            String text = scanner.nextLine();
+            if(text.equals("exit")){
+                break;
+            }
+
+        }
+        System.out.println("종료합니다.");
+        
+        scanner.close();
+    }
+
+}
+```
+
+### break 문
+- 반복문 하나를 즉시 벗어날 때 사용. 하나의 반복문 벗어남
+- 중첩반복의 경우안쪽 반복문의 break 문이 실행되면 안쪽 반복문 벗어남
+
 ### continue 예제 
 ```java
 import java.util.Scanner;
