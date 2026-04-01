@@ -1,5 +1,244 @@
 # 202530128 정하형 java2 
 
+## 4/1
+
+### continue 예제 
+```java
+import java.util.Scanner;
+
+public class Ex05 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("정수를 5 개 입력하세요");
+
+        int sum = 0;
+
+        for(int i = 0 ; i < 5 ; i++) {
+            int n = scanner.nextInt();
+            if(n <= 0) {
+                continue;
+            }
+            else {
+                sum += n;
+            }
+            System.out.println("양수의 합은 :" + sum);
+        }
+
+        scanner.close();
+    }
+}
+```
+
+### continue 문
+- 반복문을 빠져 나가지 않고 , 다음 반복으로 제어변경.
+- 반복문에서
+
+### 예제 2
+
+```java
+public class Ex34NextedLoop {
+    public static void main(String[] args) {
+
+        System.out.println("구구단을 가로로 출력하는 프로그램");
+
+        for(int i = 2 ; i < 10 ; i++) {
+            System.out.println("[" + i + "단] \t");
+        }
+
+        for(int i = 1 ; i < 10 ; i++) {
+            for(int j = 2 ; j < 10 ; j++) {
+                System.out.print(j + "*" + i + "=" + i*j + "\t");
+            }
+            System.err.println();
+        }
+    }
+}
+```
+
+### 예제 1
+
+```java
+public class Ex34NextedLoop {
+    public static void main(String[] args) {
+        // 2 단 부터 9단 까지 반복
+        for(int i = 2 ; i < 10 ; i++) 
+        {
+            System.out.println("[" + i +"단]");
+            // 각 단의 1 부터 9 까지 곱셈
+            for(int j = 1 ; j < 10 ; j++) {
+                System.out.print(i+"*" + j + "=" + i*j);
+                System.out.println("\t");
+            }
+            // 단이 끝날 때마다 줄바꿈
+            System.out.println();
+        }
+    }
+}
+```
+
+### 중첩반복
+- 반복문이 다른 반복문을 내포하는 구조
+
+```java
+public class Ex34NextedLoop {
+    public static void main(String[] args) {
+        for(int i = 1 ; i < 10 ; i++) 
+        {
+            for(int j = 1 ; j < 10 ; j++) {
+                System.out.println(i+"*" + j + "=" + i*j);
+                System.out.println("\t");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+### do-while 문
+- 작업문은 한 번 반복 실행.
+- 조건식이 참인 동안 반복 실행
+
+### while 문
+- while 문의 구성과 코드 사례 : 조건식이 참인 동안 반복 실행
+
+
+
+### 예제
+```java
+public class Ex01 {
+    public static void main(String[] args) {
+        int i , sum =0;
+
+        for(i = 1 ; i <= 10 ; i++) {
+            sum +=i;
+            System.out.println(i);
+
+            if(i <= 9){
+                System.out.println("+");
+            } 
+            else {
+                System.out.println("=");
+                System.out.println(sum);
+            }
+        }
+    }
+}
+```
+
+### 반복문과 배열 그리고 예외 처리
+
+### switch 예제
+```java
+import java.util.Scanner;
+
+public class Ex13 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("월 (1~12)을 입력하시오");
+        int month = scanner.nextInt();
+        switch (month) {
+            case 3:
+            case 4:
+            case 5:
+                System.out.println("봄 입니다.");
+                break;
+            case 6:
+            case 7:
+            case 8:
+                System.out.println("여름 입니다.");
+                break;
+            case 9:
+            case 10:
+            case 11:
+                System.out.println("가을 입니다.");
+                break;
+            case 12:
+            case 1:
+            case 2:
+                System.out.println("겨울 입니다.");
+                break;
+            default:
+                break;
+        }
+    }
+}
+```
+
+### switch 문에서 break 의 역할
+- switch 문 내의 break문
+
+### switch 문
+- switch 문의 식과 case 문의 값 비교
+
+
+### 다중 if-else 문
+- 다중 if 문 
+- 조건문이 너무 많은 경우, switch 문 사용 권장
+
+### 예제 2-11 
+- 나이를 입력 받아 20 대 인지 판별하는 
+```java
+import java.util.Scanner;
+
+public class EX10 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("나이를 입력하시오: ");
+        int age = scanner.nextInt();
+
+        if((age>= 20) && (age < 30)) {
+            System.out.println("20대 입니다."); 
+            System.out.println("20대 라서 행복합니다.."); 
+        } else {
+            System.out.println("20대가 아닙니다.");
+        }
+        scanner.close();
+    }
+}
+
+```
+
+### 조건문 단순 if 문 if else 문
+- 단순 if 문 
+- if 의 괄호 안에 조건식 
+- 실행문장이 단일 문장인 경우 둘러싸는 , 생략가능
+
+- if else 문 
+- 조건식이 ture 이면 실행 문장 1 . false 이면 실행문장 2 실행
+
+### 비트 연산
+- 비트 개념
+```java
+byte x = 10;
+```
+
+- 비트 논리 연산 : 비트끼리 AND,OR,NOT 연산
+- 비트 시프트 연산 : 비트를 오른쪽이나 왼쪽으로 이동
+
+
+```java
+public class Ex09 {
+    public static void main(String[] args) {
+        int a= 3,b=5;
+
+        System.out.println("두 수의 차는 " + ((a>b) ? (a-b) : (b-a)));
+    }
+}
+```
+
+### 조건 연산 
+- 3개의 피연자로 구성된 삼항 연산자
+- opr1 ? opr2 : opr3 -> opr1 이 결과가 true 면 opr2 , false 면 opr3
+- if else 를 조건 연산자로 간결하게 표현 가능
+
+### 비교 연산과 논리 연산
+
+- 비교 연산자 : 두 개의 값을 비교하여 true , false 결과
+- 논리 연산자 : 두 개의 논리 값에 논리 연산, 논리 결과
+
 ## 3/25
 
 ### 산술 연산자
