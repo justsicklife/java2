@@ -1,8 +1,179 @@
 # 202530128 정하형 java2 
 
+
+## 4/15
+
+### 메서도 오버로딩 
+- 한 클래스 내에서 두 개 이상의 이름이 같은 메서드 작성
+- 메소드 이름이 동일해야 함 
+- 매게 변수의 개수 혹은 타입이 달라야함
+- 리턴 타입은 오버로딩 과 관련없음
+- 성공한 오버로딩과 메서드 호출
+
+### 인자 전달 - 배열이 전달되는 경우
+- 배열 레퍼런스만 매개 변수에 전달 : 배열 통쨰로 전달되지 않음
+- 객체가 전달되는 경우와 동일 : 매게변수가 실인자의 배열 공유
+
+### 인자 전달 - 기본 타입의 값이 전달되는 경우
+- 매게변수가 byte, int , double 등 기본 타입으로 선언되었을 때
+- 호출자가 건네는 값이 매게변수에 복사되어 전달. 실 인자값은변경되지 않음
+
+
+### 메서드 
+- 메서드는 C/C++ 의 함수와 동일하다
+- 자바의 모든 메서드는 반드시 클래스 안에 있어야 한다(캡슐화 원칙)
+- 메서드 형식
+- 접근 지정자 : 다른 클래스에서 메서드를 접근할 수 있는지 여부 선언
+- public private protected 디폴트
+- 리턴 타입 : 메소드가 리턴하는 값의 데이터 타입
+
+### 예제 
+```java
+class Circle {
+    int radius;
+
+    public Circle(int radius) {
+        this.radius  =radius;
+    }
+
+    public double getArea() {
+        return 3.14 * radius * radius;
+    }
+
+}
+
+public class Ex46CircleArray {
+
+    public static void main(String[] args) {
+        Circle[] c;
+        c = new Circle[5];
+        
+        for(int i = 0 ; i < c.length ; i++) {
+            c[i] = new Circle(i);
+        }
+
+        for(int i = 0 ; i < c.length; i++) {
+            System.out.println((int)(c[i].getArea()) + " ");
+        }
+    }    
+}
+```
+
+### 객체 배열
+- 객체에대한레퍼런스 배열
+- 자바에 객체 배열 만들기 3단계
+- 1. 배열 레퍼런스 변수선언
+- 2. 레퍼런스 배열 생성
+- 3. 배열의 각 원소 객체 생성
+
+### this 레퍼런스
+- 객체 자신에 대한 레퍼런스
+- 컴파일러에 의해 자동 관리, 개발자는 사용하기만 하면 됨
+- this 멤버 형태로 멤버를 접근할 때 사용
+
+### 생성자의 종류
+- 기본 생성자 매게 변수 없고, 아무 작업 없이 단순 리턴하는 생성자
+- 기본 생성자가 자동 생성 되는 경우
+- 클래스에 생성자가 하나도 선언되어 있지 않을 때
+- 컴파일러에 의해 기본 생성자를 자동 생성하지 않는다.
+
+### 예제
+```java
+public class eX44Book {
+    String title;
+    String author;
+
+    public eX44Book(String t) {
+        title = t;
+        author = "작자미상";
+    }
+
+    public eX44Book(String t,String e) {
+        title = t;
+        author = e;
+    }
+
+    public static void main(String[] args) {
+        eX44Book littlePrince = new eX44Book("어린 왕자","생텍쥐페리");
+        eX44Book loveStroy = new eX44Book("춘향");
+        System.out.println(littlePrince.title +  " "  +littlePrince.author);
+        System.out.println(loveStroy.title +  " " + loveStroy.author);
+    }
+}
+```
+
+### 생성자의 특징
+- 생성자 이름은 클래스 이름과 동일
+- 생성자는 여러 개 작성 가능
+- 생성자는 객체 생성시 한 번만 호출
+- 생성자의 목적은 객체 생성 시 초기화
+- 생성자는 리턴 타입을 지정할 수 없음
+
+### 생성자 개념과 목적
+- 생성자
+- 객체가 생성될 때 초기화 목적으로 실행되는 메서드
+- 객체가 생성되는 순간에
+
+### 예제 Rectangle 클래스 만들기 연습
+```java
+import java.util.Scanner;
+
+public class Rectangle {
+    int width;
+    int height;
+
+    public int getArea() {
+        return width * height;
+    }
+
+    public static void main(String[] args) {
+        Rectangle rect = new Rectangle();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(">>");
+        rect.width = scanner.nextInt();
+        rect.height = scanner.nextInt();
+        System.out.println("사각형의 면적은 " + rect.getArea());
+        scanner.close();
+    }
+}
+```
+
+### 예제
+- 반지름과 이름을 가진 Circle 클래스를 작성하고, Circle 클래스이 객체를 생성하라
+```java
+public class Ex41Circle {
+    int radius;
+    String name;
+
+    public double getArea() {
+        return 3.14 * radius * radius;
+    }
+
+    public static void main(String[] args) {
+        Ex41Circle pizza;
+        pizza = new Ex41Circle();
+        pizza.radius = 10;
+        pizza.name = "자바피자";
+        double area = pizza.getArea();
+        System.out.println(pizza.name + " 의 면적은 " + area);
+
+        Ex41Circle donut = new Ex41Circle();
+        donut.radius = 2;
+        donut.name = "자바 도넛";
+        area =donut.getArea();
+        System.out.println(donut.name + "의 면적은 " + area);
+    }
+}
+
+```
+
+### 자바 클래스 구성
+- class 키워드 선언
+- 멤버 : 클래스 구성 요소. 필드와 메서드
+- 클래스에 대한 public 접근 지정 : 다른 모든클래스에서 사용 허락
+- 멤버에 대한 public 접근 지정 : 다른 모든 클래스에게 멤버 접근 허용
+
 ## 4/8
-
-
 
 ### 자바 클래스의 구성
 - class 키워드로 선언
