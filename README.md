@@ -1,5 +1,271 @@
 # 202530128 정하형 java2 
 
+## 4/29
+
+
+
+### 자바 패키지와 모듈이란?
+- 패키지 
+- 서로 관련된 클래스와 인터페이스를 컴파일한 클래스 파일들을 묶어 놓은 디렉터라
+- 하나의 응용 프로그램은 한 개 이상의 패키지로 작성
+- 패키지는 jar 파일로 압축할 수 있음
+
+- 모듈 
+- 여러 패키지와 이미지 등의 자원을 모아 놓은 컨테이너
+- 하나의 모듈만 하나의 .jmod 파일에 저장
+
+- java 9 부터 모듈화 도입
+- 플랫폼의 모듈화 : java 9 부터 자바 API 의 모든 클래스들(자바 실행환경)을패키지 기반에서 모듈들로 완전히 재구성
+- 응용프로그램의 모듈화 : 클래스들은 패키지로 만들고, 다시 패키지를 모듈로 만듦 모듈 프로그래밍은 어렵고 복잡
+
+### 패키지 개념과 필요성
+- 3명이분담하여 자바 응용프로그램을 개발하는 경우, 동일한 이름의 클래스가 존재할 가능성이 있음.
+- 합칠 때 오류 발생 가능성.
+
+### 추상클래스 vs 인터페이스
+- 공통점
+- 추상 메서드를 가지고 있어야 한다.
+- 인스턴스화 할 수 없다.
+- 상속받아 구현한 구현체의 인스턴스를 사용해야 한다.
+- 상속한 클래스는 추상 메서드를 반드시 구현해야 한다.
+
+### 인터페이스의 구성 요소들의 특징
+- 상수 : public 허용 , public static final 생략
+- 추상 메서드 : public abstract 생략가능
+- default 메서드 :
+- 인터페이스에 코드가 작성된 메서드
+- 인터페이스를 구현하는 클래스에 자동 상속
+- public 접근 지정만 허용. 생략가능
+
+
+### 자바의 인터페이스
+- 소프트웨어를 규격화된 모듈로 만들고 , 인터페이스가 맞는 모듈을 조립하듯이 응용프로그램을 작성하기 위해서 사용
+- 자바의 인터페이스 
+- 클래스가 구현해야 할 메서드 들이 선언되는 추상형
+- 인터페이스 선언 : interface 키워드로 선언. 
+
+### 추상 클래스의 목적
+- 추상 클래스의 목적
+- 상속을 위한 슈퍼 클래스로 활용하는 것
+- 서브 클래스에서 추상 메서드 구현
+- 다형성 실현
+
+### 추상 클래스의 상속과 구현
+- 추상 클래스 상속
+- 추상 클래스를 상속받으면 추상 클래스가 됨
+- 서브 클래스도 abstract 로 선언해야함
+
+- 추상클래스 구현
+- 서브 클래스에서 슈퍼 클래스의 추상 메서드 구현
+- 추상 클래스를 구현한 서브 클래스는 추상 클래스가 아님
+
+### 추상 클래스의 인스턴스 생성
+- 추상 클래스는 온전한 클래스가 아니기 때문에 인스턴스를 생성할수 없음
+
+
+### 추상 클래스 
+- 추상 메서드 
+- : abstract 로 선언된 메서드, 메서드의 코드는 없고 원형만 선언
+
+- 추상 클래스 
+- 추상 메서드를 가지며, abstract 로 선언된 클래스
+- 추상 메서드 없이 , abstract 로 선언한 클래스
+
+### 오버로딩과 오버라이딩
+
+- 메소드 오버로딩
+- 조건 : 메서드의 이름은 반드시 동일함 메서드 인자의 개수나 인자의 타입이 달라야 성립
+
+- 메서드 오버라이딩
+- 메서드의 이름 인자의 타입 인자의 개수 인자의 리턴 타입 등이 모두 동일하여야 성
+
+### 예제 메소드 오버라이딩으로 다형성 실현
+```java
+public class Ex54MethodOverridingEx {
+    static void paint(Shape p) {
+        p.draw();
+    }
+
+    public static void main(String[] args) {
+        Line line = new Line();
+        paint(line);
+  
+        paint(new Shape());
+        paint(new Circle());
+        paint(new Rect());
+    }
+}
+
+class Shape {
+    public void draw(){
+        System.out.println("Shape");
+    }
+}
+
+class Line extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Line");
+    }
+}
+
+class Rect extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Rect");
+    }
+}
+
+class Circle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Circle");
+    }
+}
+```
+
+### 오버라이딩 목적, 다형성 실현
+- 오버라이딩으로 다형성 실현
+- 하나의 인터페이스에 서로 다른 구현
+- 슈퍼 클래스의 메서드를 서브 클래스에서 각각 목적에 맞게 다르게 구현
+- 사례 : Shape의 Draw() 메서드를 Line,Rect,Circle에서 오버라이딩하여 다르게 구현]
+
+### 서브 클래스 객체오와 오버라이딩 메서도 호출
+- 오버라이딩 한 메서드가 실행됨을 보장
+
+### 메소드 오버라이딩
+- 서브 클래스에서 슈퍼 클래스의 메소드 중복 작성
+- 슈퍼 클래스의 메소드 무력화, 항상 서브 클래스에 오버라이딩한 메서드가 실행되도록 보장됨
+- 메서드 무시하기로 번역되기도 함
+- 오버라이딩 조건
+- 슈퍼 클래스 메서드의 원형(메서드 이름,인자 타입및개수,리턴 타입) 동일 하게 작성
+
+### 다운 캐스팅
+- 슈퍼 클래스 레퍼런스를 서브 클래스 레퍼런스에 대입
+- 업캐스팅 된 것을 다시 원래대로 되돌리는 것
+- 반드시 명시적 타입 변환 지정
+
+### 그렇다면 왜 p = s 로 업캐스팅을 한 걸까?
+- 이 사례는 업캐스팅의 제한 사항을 설명하기 위한 코드 입니다.
+- 실제로는 이런 식으로 업 캐스팅을  사용하지 않습니다.
+- 실제로는 여러 자식 클래스를 하나의 부모 타입으로 다루기 위해 사용합니다.
+- 이렇게 하면 공통된 타입 으로 여러 자식 클래스를 한 배열에 담을수 있습니다.
+- 대신 접근은 Person 수준에서만 가능합니다.
+
+
+### 업 캐스팅 개념
+- 하위 클래스의 레퍼런스는 상위 클래스를 가리킬 수 없지만, 상위 클래스의 레퍼런스는 하위 클래스를 가리킬 수 있다는 설명.
+- 생물이 들어가는 박스에 사람이나 코끼리를 넣어도 무방
+- 사람이 코끼리 모두 생물을 상속받았기 때문
+- 업 캐스팅이란 
+- 서브 클래스의 레퍼런스를 슈퍼 클래스 레퍼런스에 대입
+- 슈퍼 클래스 레퍼런스로 서브 클래스 객체를 가리키게 됨
+
+### 예제 super()를 활용한 ColorPoint 작성
+```java
+class Point1 {
+    private int x,y;
+
+    public Point1() {
+        this.x = this.y = 0;
+    }
+
+    public Point1(int x,int y){
+        this.x = x; 
+        this.y = y;
+    }
+
+    public void showPoint() {
+        System.out.println("(" + x + "," + y + ")");
+    }
+}
+
+class ColorPoint1  extends Point1{
+    private String color;
+    public ColorPoint1(int x,int y ,String color) {
+        super(x,y);
+        this.color = color;
+    } 
+
+    public void showColorPoint() {
+        System.out.println(color);
+        showPoint();
+    }
+}
+
+public class Ex52SuperEx {
+    public static void main(String[] args) {
+        ColorPoint1 cp = new ColorPoint1(5, 6, "blue");
+        cp.showColorPoint();
+    }
+}
+
+```
+
+### 서브 클래스와 슈퍼 클래스의 생성자 선택
+- 슈퍼 클래스와 서브 클래스 : 각각 여러 개의 생성자 접근 가능
+- 서브 클래스의 객체가 생성될 때 : 슈퍼 클래스 1개와 서브 클래스 생성자 1개 가 실행
+- 서브 클래스의 생성자와 슈퍼클래스의 생성자가 결정되는 방식
+- 개발자의 명시적 선택
+- 서브 클래스 개발자가 슈퍼 클래스의 생성자 명시적 선택
+
+### 슈퍼 클래스의 멤버에 대한 서브 클래스의 접근
+- 슈퍼 클래스의 private 멤버 : 서브클래스에서 접근 x
+- 슈퍼 클래스의 디폴트 멤버 : 서브 클래스가 동일한 패키지에 있을 때 접근가능
+- 슈퍼 클래스의 public 멤버 : 서브 클래스는 항상 접근 가능
+
+### 자바 상속의 특징
+- 클래스 다중 상속 불허
+- 자바는 인터페이스 다중 상속 가능
+
+
+### 예제 클래스 상속 
+```java
+public class Ex51ColorPointEx {
+    public static void main(String[] args) {
+        Point p = new Point();
+        p.set(1, 2);
+        p.showPoint();
+
+        ColorPoint cp = new ColorPoint();
+        cp.setColor("red");
+        cp.set(3, 4);
+        cp.showColorPoint();
+    }
+
+}
+
+class Point {
+    private int x,y;
+
+    public void set(int x,int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void showPoint() {
+        System.out.println("(" +x + "," + y + ")");
+    }
+}
+
+class ColorPoint extends Point {
+    private String color;
+
+    public void setColor(String color) {
+        this.color =color;
+    }
+
+    public void showColorPoint() {
+        System.out.println(color);
+        showPoint();
+    }
+}
+```
+
+### 클래스 상속과 객체
+- 상속 선언 : extends 키워드 사용
+- 부모 클래스를 물려받아 자식 클래스를 
+
 ## 4/15
 
 ### static 의 활용
