@@ -1,5 +1,125 @@
 # 202530128 정하형 java2 
 
+## 5/20
+
+### 익명 클래스로 이벤트 리스너 작성
+ - 익명 클래스 : 이름 없는 클래스
+ - (클래스 선언 + 인스턴스 생성) 을 한번에 달성
+ - 간단한 리스너의 경우 익명 클래스 사용 추천 메서드의 개수가 1,2 개인 리스너 에 대해 주로 사용
+ - ActionListener 를 구현하는 이벤트 리스너 작성
+
+### 예제 독립 클래스로 Action 이벤트 리스너 만들기
+```java
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class IndepClassListener extends JFrame {
+    public IndepClassListener() {
+        setTitle("Action 이벤트 리스너 예제");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container c = getContentPane();
+        c.setLayout(new FlowLayout());
+        JButton btn = new JButton("Action");
+        btn.addActionListener(new Ex91MyActionListener());
+        c.add(btn);
+        setSize(250,120);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new IndepClassListener();
+    }
+}
+
+class Ex91MyActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        JButton b = (JButton)e.getSource();
+        if(b.getText().equals("Action")){
+            b.setText("액션");
+        }else {
+            b.setText("Action");
+        }
+    }
+}
+```
+
+### 이벤트 리스너 작성 방법
+- 독립 클래스로 작성
+- 이벤트 리스너를 완전한 클래스로 작성
+- 이벤트 리스너를 여러 곳에서 사용할 때 적합
+- 내부 클래스로 작성
+- 클래스 안에 멤버처럼 클래스 작성
+- 이벤트 리스너를 특저 클래스에서만 사용할 때 적합
+- 익명 클래스로 작성
+- 클래스의 이름없이 간단히 리스너 작성
+- 클래스 조차 만들 필요 없이 리스너 코드가 간단한 경우에 적합
+
+### 이벤트 리스너 작성 과정 사례
+- 이벤트와 이벤트 리스너 선택 
+- 버튼 클릭을 처리하고자 하는 경우
+- 이벤트 : ActionEvent, 이벤트 리스너 : ActionListener
+- 이벤트 리스너 클래스 작성 : ActionListener 인터페이스 구현    
+- 이벤트 리스너 등록
+- 이벤트를 받아 처리하고자 하는 컴포넌트에 이벤트 리스너 등록
+- component.addXXXXListener 
+- xxx : 이벤트 명, listener : 이벤트 리스너 객체 
+
+### 리스너 인터페이스
+- 이벤트 리스너 : 이벤트를 처리하는 자바 프로그램 코드 , 클래스로 작성
+- 자바는 다양한 리스너 인터페이스 제공
+- 예 : ActionListener 인터페이스 - 버튼 클릭 이벤트를 처리하기 위한 인터페이스
+- 예 : MouseListener 인터페이스  - 마우스 조작에 따른 이벤트를 처리하기 위한 인터페이스
+- 사용자의 이벤트 리스너 작성 
+- 자바의 리스너 인터페이스를 상속받아 구현
+- 리스너 인터페이스의 모든 추상 메소드를 구현
+
+### 이벤트 객체
+- 이벤트 객체 
+- 발생한 이벤트에 관한 정보를 가진 객체
+- 이벤트 리스너에 전달됨
+- 이벤트 리스너 코드가 발생한 이벤트에 대한 상황을 파악할 수 있게 함
+- 이벤트 객체가 포함하는 정보
+- 이벤트 종류의 이벤트와 소스
+- 이벤트가 발생한 버튼이나 메뉴 아이템의 문자열
+- 클릭된 마우스 버튼 번호 및 마우스의 클릭 횟수
+- 키의 코드 값과 문자 값
+- 체크박스, 라디오버튼 등과 같은 컴포넌트에 이벤트가 발생하였다면 체크 상태
+- 이벤트 소스를 알아내는 메서드 : Object getSource()
+- 발생한 이벤트의 소스 컴포넌트 리턴
+- Object 타입으로 리턴하므로 캐스팅 하여 사용.
+- 모든 이벤트 객체에 대해 적용
+
+### 자바 스윙 프로그램에서 이벤트 처리 과정
+- 이벤트 발생
+- 예 : 마우스의 움직입 혹은 키보드 입력
+- 이벤트 객체 생성
+- 현재 발생한 이벤트에 대한 정보를 가진 객체
+- 응용프로그램에서 작성된 이벤트 리스너 찾기
+- 이벤트 리스너 실행 
+- 리스너에 이벤트 객체 전달
+- 리스너 코드 실행
+
+### 이벤트 기반 프로그래밍
+
+- 이벤트 기반 프로그래밍 
+- 이벤트의 발생에 의해 프로그램 흐름이 결정되는 방식
+- 이벤트가 발생하면 이벤트를 처리하는 루틴 실행
+- 실행될 코드는 이벤트의 발생에 의해 전적으로 결정
+- 반대 되는 개념 : 배치 실행
+- 프로그램의 개발자가 프로그램의 흐름을 결정하는 방식
+- 이벤트 종류
+- 사용자의 입력 : 마우스 드래그 , 마우스 클릭 , 키보드 누름 등
+- 센서로부터의 입력 , 네트워크로부터 데이터 송수신
+- 다른 응용프로그램이나 다른 스레드로부터의 메시지
+- 이벤트 기반 응용 프로그램 의 구조
+- 각 이벤트마다 처리하는 리스너 코드 보유
+- 이벤트 기반 응용프로그램의 구조
+- 각 이벤트 마다 처리하는 리스너 코드 보유
+- GUI 응용프로그램은 이벤트 기반 프로그래밍으로 작성됨
+- GUI 라이브러리 종류 : C++ 의 MFC 등등
+- 자바의 AWT 와 Swing 
+
 ## 5/13
 
 ### 배치관리자 없는 컨테이너에 컴포넌트를 절대위치와 절대 크기로 지정
